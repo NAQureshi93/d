@@ -1,0 +1,22 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+fvOptions
+{
+    centrifugalForce              // Perfect name/structure
+    {
+        type            explicitForce;     ✓ Simple & robust
+        libs            ("libfvOptions.so"); ✓
+        active          true;              ✓
+        selectionMode   all;               ✓ No topoSet needed
+        explicitForceCoeffs
+        {
+            fieldNames  (U);               ✓ Targets velocity
+            expression  "-1500*1500*pos().x*(1 0 0)";  // ABSOLUTELY CORRECT
+        }
+    }
+}

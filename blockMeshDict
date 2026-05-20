@@ -1,0 +1,97 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+/* system/blockMeshDict */
+convertToMeters 1;
+
+R = 0.075;       // outer radius (m)
+H = 1.0;         // length (m)
+th = 0.001309;    // wedge thickness (m)
+
+vertices
+(
+    (0          0           0)
+    (0.07499      -0.001309   0)
+    (0.07499       0.001309   0)
+    (0          0           0)
+
+    (0          0           1)
+    (0.07499      -0.001309   1)
+    (0.07499       0.001309   1)
+    (0          0           1)
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7)
+    (100 1 100)
+    simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    axis
+    {
+        type symmetryPlane;
+        faces
+        (
+            (0 3 7 4)
+        );
+    }
+
+    rotorWall
+    {
+        type wall;
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+
+    bottom
+    {
+        type wall;
+        faces
+        (
+            (0 1 2 3)
+        );
+    }
+
+    top
+    {
+        type wall;
+        faces
+        (
+            (4 5 6 7)
+        );
+    }
+
+    wedgeFront
+    {
+        type wedge;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+
+    wedgeBack
+    {
+        type wedge;
+        faces
+        (
+            (3 2 6 7)
+        );
+    }
+);
+
+mergePatchPairs ();

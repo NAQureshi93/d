@@ -1,0 +1,34 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application     rhoCentralFoam;
+
+startFrom       startTime;
+startTime       0;
+
+stopAt          endTime;
+endTime         0.5;        // Physical time in seconds
+
+deltaT          1e-4;
+
+
+adjustTimeStep  yes;
+maxCo           0.5;         // Lower for stability
+maxDeltaT       1e-2;
+
+libs           ("libfvOptions.so"); 
+
+writeControl    runTime;
+writeInterval   0.01 
+purgeWrite      0;
+
+writeFormat     binary;      // Binary for smaller files
+writePrecision  6;
+writeCompression off;
+
+runTimeModifiable yes;
