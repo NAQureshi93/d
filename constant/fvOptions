@@ -1,0 +1,23 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+
+fvOptions
+{
+    centrifugalForce
+    {
+        type            explicitForce;
+        libs            ("libfvOptions.so");
+        active          true;
+        selectionMode   all;
+        explicitForceCoeffs
+        {
+            fieldNames  (U);
+            expression  "-1500*1500*pos().x*(1 0 0)";
+        }
+    }
+}
